@@ -10,6 +10,7 @@ export default function New({ onAddHabit }) {
 
     const newHabitInstance = new Habit(habitName);
     const plainHabitObject = { ...newHabitInstance };
+
     onAddHabit(plainHabitObject);
     setHabitName('');
   };
@@ -17,8 +18,17 @@ export default function New({ onAddHabit }) {
   return (
     <div className="new-habit-container">
       <form onSubmit={handleSubmit} className="new-habit-form">
-        <input type="text" className="input-field" placeholder="Type and press Enter..." value={habitName} onChange={(e) => setHabitName(e.target.value)}/>
-        <button type="submit" className="btn-submit">Add Habit</button>
+        <input
+          type="text"
+          className="input-field"
+          style={{ paddingRight: '130px' }}
+          placeholder="Create a new routine..."
+          value={habitName}
+          onChange={(e) => setHabitName(e.target.value)}
+        />
+        <button type="submit" className="btn-submit">
+          Confirm
+        </button>
       </form>
     </div>
   );

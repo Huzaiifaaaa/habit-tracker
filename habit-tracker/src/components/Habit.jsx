@@ -7,14 +7,21 @@ export default function Habit({ habitItem, weekDays, formatDateKey, onToggleCell
   const calculateStreak = () => {
     let streak = 0;
     let checkDate = new Date();
-    let todayStr = formatDateKey(checkDate);
 
+    const getLocalDateString = (date) => {
+      const offset = date.getTimezoneOffset();
+      const localDate = new Date(date.getTime() - (offset * 60 * 1000));
+      return localDate.toISOString().split('T')[0];
+    };
+
+    let todayStr = getLocalDateString(checkDate);
     if (!completionSet.has(todayStr)) {
       checkDate.setDate(checkDate.getDate() - 1);
     }
 
     while (true) {
-      const currentStr = formatDateKey(checkDate);
+      const currentStr = getLocalDateString(checkDate);
+
       if (completionSet.has(currentStr)) {
         streak++;
         checkDate.setDate(checkDate.getDate() - 1);
@@ -48,9 +55,9 @@ export default function Habit({ habitItem, weekDays, formatDateKey, onToggleCell
           </button>
         </div>
       </td>
-      
+
       <td className="cell-centered">
-        <span className={`streak-badge ${streakCount > 0 ? 'streak-active' : 'streak-zero'}`}> 
+        <span className={`streak-badge ${streakCount > 0 ? 'streak-active' : 'streak-zero'}`}>
           {streakCount} {streakCount === 1 ? 'day' : 'days'}
         </span>
       </td>
@@ -59,13 +66,13 @@ export default function Habit({ habitItem, weekDays, formatDateKey, onToggleCell
         const dateStr = formatDateKey(dateObj);
         const isChecked = completionSet.has(dateStr);
         const isToday = dateStr === formatDateKey(new Date());
-        
+
         return (
           <td key={dateStr} className={`cell-centered ${isToday ? 'cell-today' : ''}`}>
-            <input 
-              type="checkbox" 
-              className="checkbox-custom" 
-              checked={isChecked} 
+            <input
+              type="checkbox"
+              className="checkbox-custom"
+              checked={isChecked}
               onChange={() => onToggleCell(habitItem.unique_key, dateStr)}
             />
           </td>
