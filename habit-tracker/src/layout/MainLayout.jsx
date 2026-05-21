@@ -40,6 +40,16 @@ const MainLayout = () => {
     setHabits((prev) => [...prev, newHabitObject]);
   };
 
+  const handleRenameHabit = (uniqueKey, newName) => {
+    if (!newName.trim()) return;
+    setHabits((prevHabits) =>
+      prevHabits.map((h) => {
+        if (h.unique_key !== uniqueKey) return h;
+        return { ...h, habit: newName.trim() };
+      })
+    );
+  };
+
   const handleDeleteHabit = (uniqueKey) => {
     setHabits((prev) => prev.filter((h) => h.unique_key !== uniqueKey));
   };
@@ -75,7 +85,7 @@ const MainLayout = () => {
     <div className="app-container">
       <Header onShiftWeek={handleShiftWeek} onResetToday={handleResetToday} habitCount={habits.length}/>
       <New onAddHabit={handleAddHabit} />
-      <View habits={habits} weekDays={weekDays} formatDateKey={formatDateKey} onToggleCell={handleToggleCell} onDeleteHabit={handleDeleteHabit}/>
+      <View habits={habits} weekDays={weekDays} formatDateKey={formatDateKey} onToggleCell={handleToggleCell} onRenameHabit={handleRenameHabit} onDeleteHabit={handleDeleteHabit}/>
     </div>
   );
 }

@@ -85,6 +85,69 @@ body {
   background-color: #333333;
 }
 
+.btn-habit-name {
+  transition: opacity 0.15s ease;
+}
+
+.btn-habit-name:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+tr:hover .edit-indicator {
+  opacity: 1 !important;
+}
+
+/* Layout block container matching inside the table cell wrapper */
+.habit-title-cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Bold weight formatting structure for the title */
+.habit-text-label {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* Flex group aligning action buttons nicely in a single row */
+.habit-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Base structural utility rules for icons buttons */
+.btn-action-icon {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+/* Specific red color tone replacement logic on delete button hovering states */
+.btn-delete-accent:hover {
+  color: var(--danger-color) !important;
+}
+
+/* Light up buttons smoothly when hovering over the table row block matrix */
+tr:hover .btn-action-icon {
+  opacity: 1;
+}
+
+/* Standard clean text center positioning helper */
+.cell-centered {
+  text-align: center;
+}
+
 /* ==========================================================================
    3. INPUT COMPONENT (New.jsx)
    ========================================================================== */
@@ -229,6 +292,11 @@ tr:hover .btn-delete {
   accent-color: var(--primary-color); /* Elegant browser checkbox tinting */
 }
 
+.checkbox-custom:hover {
+  transform: scale(1.2);
+  transition: transform 0.5s ease;
+}
+
 /* ==========================================================================
    5. EMPTY STATE
    ========================================================================== */
@@ -269,3 +337,4 @@ tr:hover .btn-delete {
     flex-direction: row;
   }
 }
+

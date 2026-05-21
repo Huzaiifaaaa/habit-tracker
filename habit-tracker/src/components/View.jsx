@@ -1,7 +1,7 @@
 import React from 'react';
 import Habit from './Habit';
 
-export default function View({ habits, weekDays, formatDateKey, onToggleCell, onDeleteHabit }) {
+export default function View({ habits, weekDays, formatDateKey, onToggleCell, onRenameHabit, onDeleteHabit }) {
   const todayKey = formatDateKey(new Date());
 
   if (habits.length === 0) {
@@ -37,7 +37,7 @@ export default function View({ habits, weekDays, formatDateKey, onToggleCell, on
         </thead>
         <tbody>
           {habits.map((item) => (
-            <Habit key={item.unique_key} habitItem={item} weekDays={weekDays} formatDateKey={formatDateKey} onToggleCell={onToggleCell} onDeleteHabit={onDeleteHabit}/>
+            <Habit key={item.unique_key} habitItem={item} weekDays={weekDays} formatDateKey={formatDateKey} onToggleCell={onToggleCell} onRenameHabit={onRenameHabit} onDeleteHabit={onDeleteHabit}/>
           ))}
         </tbody>
       </table>
