@@ -1,0 +1,271 @@
+/* ==========================================================================
+   1. CORE RESET & VARIABLES
+   ========================================================================== */
+:root {
+  --primary-color: #0070f3;
+  --primary-hover: #0051b3;
+  --bg-color: #fafafa;
+  --card-bg: #ffffff;
+  --border-color: #eaeaea;
+  --text-main: #1a1a1a;
+  --text-muted: #666666;
+  --success-bg: #e6f4ea;
+  --success-text: #137333;
+  --danger-color: #ff4d4d;
+  --today-bg: #f4fbf7;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+  padding: 16px;
+}
+
+/* Container Layout wrapper */
+.app-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 8px;
+}
+
+/* ==========================================================================
+   2. HEADER & NAVIGATION
+   ========================================================================== */
+.app-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.app-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.nav-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+}
+
+.btn-nav {
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-nav:hover {
+  background-color: var(--border-color);
+}
+
+.btn-today {
+  background-color: var(--text-main);
+  color: var(--card-bg);
+  border: 1px solid var(--text-main);
+}
+
+.btn-today:hover {
+  background-color: #333333;
+}
+
+/* ==========================================================================
+   3. INPUT COMPONENT (New.jsx)
+   ========================================================================== */
+.new-habit-container {
+  margin-bottom: 24px;
+}
+
+.new-habit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input-field:focus {
+  border-color: var(--primary-color);
+}
+
+.btn-submit {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-submit:hover {
+  background-color: var(--primary-hover);
+}
+
+/* ==========================================================================
+   4. DATA GRID / TABLE MATRIX
+   ========================================================================== */
+.matrix-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Triggers swipe scroll safely on narrow viewports */
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  /* Smoother scrolling physics on iOS touch devices */
+  -webkit-overflow-scrolling: touch; 
+}
+
+.matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 750px; /* Forces stable column spacing layout on mobile overflow */
+}
+
+.matrix-table th,
+.matrix-table td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.matrix-table th {
+  background-color: #fafafa;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Column sizes */
+.col-habit { min-width: 180px; }
+.col-streak { width: 90px; text-align: center; }
+.col-day { width: 75px; text-align: center; }
+
+/* Habit row styles */
+.habit-title-cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.btn-delete {
+  background: none;
+  border: none;
+  color: var(--danger-color);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 4px 8px;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+}
+
+tr:hover .btn-delete {
+  opacity: 1;
+}
+
+/* Streak styling */
+.streak-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.streak-active {
+  background-color: var(--success-bg);
+  color: var(--success-text);
+}
+
+.streak-zero {
+  background-color: #f1f3f4;
+  color: var(--text-muted);
+}
+
+/* Day checkmarks */
+.cell-today {
+  background-color: var(--today-bg);
+}
+
+.th-today-label {
+  color: var(--success-text) !important;
+  font-weight: 700 !important;
+}
+
+.checkbox-custom {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  accent-color: var(--primary-color); /* Elegant browser checkbox tinting */
+}
+
+/* ==========================================================================
+   5. EMPTY STATE
+   ========================================================================== */
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  background-color: var(--card-bg);
+  border: 2px dashed var(--border-color);
+  border-radius: 12px;
+}
+
+.empty-text {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   6. RESPONSIVE MEDIA QUERIES (Breakpoints)
+   ========================================================================== */
+
+/* Tablet & Desktop sizing rules (600px wide and up) */
+@media (min-width: 600px) {
+  body {
+    padding: 40px 24px;
+  }
+  
+  .app-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-toolbar {
+    width: auto;
+  }
+
+  .new-habit-form {
+    flex-direction: row;
+  }
+}
