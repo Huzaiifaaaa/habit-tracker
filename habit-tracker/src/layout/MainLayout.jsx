@@ -3,7 +3,11 @@ import New from '../components/New';
 import Header from '../components/Header';
 import View from '../components/View';
 
-const formatDateKey = (date) => date.toISOString().split('T')[0];
+const formatDateKey = (date) => {
+  const offset = date.getTimezoneOffset();
+  const localDate = new Date(date.getTime() - (offset * 60 * 1000));
+  return localDate.toISOString().split('T')[0];
+};
 
 const getWeekDays = (anchorDate) => {
   const current = new Date(anchorDate);
